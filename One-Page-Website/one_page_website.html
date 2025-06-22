@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>One-page website</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #1a1a1a;
+      color: #e0b0ff;
+    }
+
+    header, nav, section, footer {
+      padding: 20px;
+    }
+
+    nav {
+      background-color: #2c003e;
+      text-align: center;
+      position: sticky;
+      top: 0;
+    }
+
+    nav a {
+      color: #e0b0ff;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    h1, h2 {
+      color: #d4a0ff;
+    }
+
+    section {
+      border-bottom: 1px solid #444;
+      padding-bottom: 40px;
+    }
+
+    .images img {
+      width: 200px;
+      margin: 10px;
+      border: 2px solid #d4a0ff;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .images img:hover {
+      transform: scale(1.05);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      max-width: 400px;
+    }
+
+    input, textarea {
+      margin: 10px 0;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+    }
+
+    input[type="submit"] {
+      background-color: #7a00cc;
+      color: white;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      background-color: #2c003e;
+      color: #ccc;
+      padding: 20px;
+    }
+
+    /* Lightbox Styles */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border: 4px solid #d4a0ff;
+      box-shadow: 0 0 20px #7a00cc;
+    }
+
+    .lightbox:target {
+      display: flex;
+    }
+
+    .close-lightbox {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      font-size: 30px;
+      color: #fff;
+      cursor: pointer;
+      z-index: 1001;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#video">Video</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="home">
+    <h1>Welcome to my one-page website!</h1>
+    <p>This is a one-page website designed using basic HTML and CSS, showcasing my custom purple and black theme.</p>
+  </section>
+
+  <section id="gallery">
+    <h2>Image Gallery</h2>
+    <div class="images">
+      <img src="https://cdn.pixabay.com/photo/2016/05/24/14/42/purple-1412470_1280.png" alt="Image 1" class="lightbox-trigger">
+      <img src="https://cdn.pixabay.com/photo/2016/05/24/14/42/purple-1412470_1280.png" alt="Image 2" class="lightbox-trigger">
+      <img src="https://cdn.pixabay.com/photo/2016/05/24/14/42/purple-1412470_1280.png" alt="Image 3" class="lightbox-trigger">
+    </div>
+  </section>
+
+  <section id="video">
+    <h2>Featured Video</h2>
+    <iframe width="914" height="514" src="https://www.youtube.com/embed/ZfzFakYejTg" title="Mixing Colors: How to Mix Purple" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" rows="5" required></textarea>
+      <input type="submit" value="Send">
+    </form>
+  </section>
+
+  <footer>
+    &copy; Marwan Desho. All rights reserved.
+  </footer>
+
+  <!-- Lightbox Container -->
+  <div class="lightbox" id="lightbox">
+    <span class="close-lightbox" id="closeBtn">&times;</span>
+    <img id="lightbox-img" src="" alt="Enlarged image">
+  </div>
+
+  <!-- JavaScript for Lightbox -->
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.getElementById('closeBtn');
+
+    document.querySelectorAll('.lightbox-trigger').forEach(img => {
+      img.addEventListener('click', () => {
+        lightbox.style.display = 'flex';
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+      });
+    });
+
+    closeBtn.addEventListener('click', () => {
+      lightbox.style.display = 'none';
+    });
+
+    // Close lightbox on outside click
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox || e.target === lightboxImg) return;
+      lightbox.style.display = 'none';
+    });
+  </script>
+
+</body>
+</html>
